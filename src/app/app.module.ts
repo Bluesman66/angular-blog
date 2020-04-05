@@ -11,6 +11,6 @@ import { PostPageComponent } from "./post-page/post-page.component";
 	declarations: [AppComponent, MainLayoutComponent, HomePageComponent, PostPageComponent],
 	imports: [BrowserModule, AppRoutingModule],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
