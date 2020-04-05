@@ -1,1 +1,26 @@
-<p>login-page works!</p>
+<form class="card" [formGroup]="form" (submit)="submit()">
+	<h2>Admin Panel Admission</h2>
+
+	<div class="form-control" [ngClass]="{ invalid: form.get('email').touched && form.get('email').invalid }">
+		<label for="email">E-mail:</label>
+		<input id="email" type="email" />
+		<div *ngIf="form.get('email').touched && form.get('email').invalid" class="validation">
+			<small *ngIf="form.get('email').errors.required">
+				Please enter e-mail
+			</small>
+			<small *ngIf="form.get('email').errors.email">
+				E-mail is invalid
+			</small>
+		</div>
+	</div>
+
+	<div class="form-control" [ngClass]="{ invalid: form.get('password').touched && form.get('password').invalid }">
+		<label for="password">Password:</label>
+		<input id="password" type="password" />
+		<div *ngIf="form.get('password').touched && form.get('password').invalid" class="validation">
+			<small>error</small>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Enter</button>
+</form>
