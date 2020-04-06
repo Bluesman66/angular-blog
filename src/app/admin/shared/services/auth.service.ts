@@ -42,13 +42,13 @@ export class AuthService {
 
 		switch (message) {
 			case "INVALID_EMAIL":
-				this.error$.next("Invalid E-mail");
+				this.error$.next("Invalid e-mail");
 				break;
 			case "EMAIL_NOT_FOUND":
-				this.error$.next("E-mail Not Found");
+				this.error$.next("E-mail not found");
 				break;
 			case "INVALID_PASSWORD":
-				this.error$.next("Invalid Password");
+				this.error$.next("Invalid password");
 				break;
 			default:
 				break;
