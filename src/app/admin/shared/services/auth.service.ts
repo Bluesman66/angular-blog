@@ -11,7 +11,12 @@ import { FbAuthResponse } from "../../../../environments/interface";
 @Injectable()
 export class AuthService {
 	get token(): string {
-		return "";
+		const expDate = new Date(localStorage.getItem("fb-token-exp"));
+		if (new Date() > expDate) {
+			this.logout();
+			return null;
+		}
+		return localStorage.getItem("fb-token");
 	}
 
 	constructor(private httpClient: HttpClient) {}
@@ -22,13 +27,21 @@ export class AuthService {
 			.pipe(tap(this.setToken));
 	}
 
-	logout() {}
+	logout() {
+		this.setToken();
+	}
 
 	isAuthenticated(): boolean {
 		return !!this.token;
 	}
 
-	private setToken(response: FbAuthResponse) {
-		console.log(response);
+	private setToken(response: FbAuthResponse = null) {
+		if (response) {
+			const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
+			localStorage.setItem("fb-token", response.idToken);
+			localStorage.setItem("fb-token-exp", expDate.toString());
+		} else {
+			localStorage.clear();
+		}
 	}
 }
