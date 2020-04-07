@@ -1,4 +1,4 @@
-<form [formGroup]="form" (submit="submit()")>
+<form [formGroup]="form" (submit)="submit()">
 	<h1>Creating a new post</h1>
 
 	<div class="form-control" [ngClass]="{ invalid: form.get('title').touched && form.get('title').invalid }">
@@ -13,6 +13,7 @@
 
 	<div class="form-control">
 		<label>Post content:</label>
+		<quill-editor formControlName="text"></quill-editor>
 	</div>
 
 	<div class="form-control" [ngClass]="{ invalid: form.get('author').touched && form.get('author').invalid }">

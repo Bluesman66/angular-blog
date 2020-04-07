@@ -1,11 +1,11 @@
-import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { FbAuthResponse, User } from 'src/app/shared/components/interfaces';
+import { Observable, Subject, throwError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import { FbAuthResponse, User } from "src/app/shared/components/interfaces";
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
-import { environment } from '../../../../environments/environment';
+import { environment } from "../../../../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -59,8 +59,6 @@ export class AuthService {
 	}
 
 	private setToken(response: FbAuthResponse = null) {
-		console.log(response);
-
 		if (response) {
 			const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
 			localStorage.setItem("fb-token", response.idToken);
