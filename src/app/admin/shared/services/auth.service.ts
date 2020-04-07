@@ -29,7 +29,7 @@ export class AuthService {
 	}
 
 	logout() {
-		this.setToken();
+		localStorage.clear();
 	}
 
 	isAuthenticated(): boolean {
@@ -58,12 +58,13 @@ export class AuthService {
 		return throwError(error);
 	}
 
-	private setToken(response: FbAuthResponse = null) {
+	private setToken(response: FbAuthResponse) {
 		if (response) {
 			const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
 			localStorage.setItem("fb-token", response.idToken);
 			localStorage.setItem("fb-token-exp", expDate.toString());
-		} else {
+		}
+		else {
 			localStorage.clear();
 		}
 	}
