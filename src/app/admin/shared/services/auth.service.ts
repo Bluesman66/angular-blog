@@ -1,12 +1,11 @@
-import { Observable, throwError, Subject } from "rxjs";
-import { tap, catchError } from "rxjs/operators";
-import { User } from "src/app/shared/components/interfaces";
+import { Observable, Subject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { FbAuthResponse, User } from 'src/app/shared/components/interfaces';
 
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { environment } from "../../../../environments/environment";
-import { FbAuthResponse } from "../../../../environments/interface";
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class AuthService {
