@@ -1,6 +1,6 @@
 import { Observable, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { FbAuthResponse, User } from "src/app/shared/components/interfaces";
+import { FbAuthResponse, User } from "src/app/shared/interfaces";
 
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -63,8 +63,7 @@ export class AuthService {
 			const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
 			localStorage.setItem("fb-token", response.idToken);
 			localStorage.setItem("fb-token-exp", expDate.toString());
-		}
-		else {
+		} else {
 			localStorage.clear();
 		}
 	}
