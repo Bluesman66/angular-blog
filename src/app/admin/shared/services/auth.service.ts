@@ -1,23 +1,23 @@
-import { Observable, Subject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { FbAuthResponse, User } from "src/app/shared/interfaces";
+import { Observable, Subject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { FbAuthResponse, User } from 'src/app/shared/interfaces';
 
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { environment } from "../../../../environments/environment";
+import { environment } from '../../../../environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 	public error$: Subject<string> = new Subject<string>();
 
 	get token(): string {
-		const expDate = new Date(localStorage.getItem("fb-token-exp"));
+		const expDate = new Date(localStorage.getItem('fb-token-exp'));
 		if (new Date() > expDate) {
 			this.logout();
 			return null;
 		}
-		return localStorage.getItem("fb-token");
+		return localStorage.getItem('fb-token');
 	}
 
 	constructor(private httpClient: HttpClient) {}
@@ -40,14 +40,14 @@ export class AuthService {
 		const { message } = error.error.error;
 
 		switch (message) {
-			case "INVALID_EMAIL":
-				this.error$.next("Invalid e-mail");
+			case 'INVALID_EMAIL':
+				this.error$.next('Invalid e-mail');
 				break;
-			case "EMAIL_NOT_FOUND":
-				this.error$.next("E-mail not found");
+			case 'EMAIL_NOT_FOUND':
+				this.error$.next('E-mail not found');
 				break;
-			case "INVALID_PASSWORD":
-				this.error$.next("Invalid password");
+			case 'INVALID_PASSWORD':
+				this.error$.next('Invalid password');
 				break;
 			default:
 				break;
@@ -61,8 +61,8 @@ export class AuthService {
 	private setToken(response: FbAuthResponse) {
 		if (response) {
 			const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
-			localStorage.setItem("fb-token", response.idToken);
-			localStorage.setItem("fb-token-exp", expDate.toString());
+			localStorage.setItem('fb-token', response.idToken);
+			localStorage.setItem('fb-token-exp', expDate.toString());
 		} else {
 			localStorage.clear();
 		}
