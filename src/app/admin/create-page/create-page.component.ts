@@ -26,7 +26,9 @@ export class CreatePageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.cSub.unsubscribe();
+		if (this.cSub) {
+			this.cSub.unsubscribe();
+		}
 	}
 
 	submit() {
