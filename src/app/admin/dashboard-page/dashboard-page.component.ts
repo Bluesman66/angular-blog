@@ -13,6 +13,7 @@ import { PostsService } from '../../shared/posts.service';
 export class DashboardPageComponent implements OnInit, OnDestroy {
 	posts: Post[] = [];
 	pSub: Subscription;
+	searchStr = '';
 
 	constructor(private postsService: PostsService) {}
 
@@ -28,7 +29,5 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	remove(id: string) {
-
-	}
+	remove(id: string) {}
 }
