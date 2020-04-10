@@ -1,29 +1,31 @@
-import { User } from "src/app/shared/interfaces";
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/shared/interfaces';
 
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Params, Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { AuthService } from "../shared/services/auth.service";
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-	selector: "app-login-page",
-	templateUrl: "./login-page.component.html",
-	styleUrls: ["./login-page.component.scss"],
+	selector: 'app-login-page',
+	templateUrl: './login-page.component.html',
+	styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 	form: FormGroup;
 	submitted = false;
 	message: string;
+	lSub: Subscription;
 
 	constructor(public auth: AuthService, private router: Router, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
 		this.route.queryParams.subscribe((params: Params) => {
-			if (params["loginAgain"]) {
-				this.message = "Please enter data";
-			} else if (params["authFailed"]) {
-				this.message = "Session is over. Please enter data once again";
+			if (params['loginAgain']) {
+				this.message = 'Please enter data';
+			} else if (params['authFailed']) {
+				this.message = 'Session is over. Please enter data once again';
 			}
 		});
 
@@ -31,6 +33,10 @@ export class LoginPageComponent implements OnInit {
 			email: new FormControl(null, [Validators.required, Validators.email]),
 			password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.lSub.unsubscribe();
 	}
 
 	submit() {
@@ -46,10 +52,10 @@ export class LoginPageComponent implements OnInit {
 			returnSecureToken: true,
 		};
 
-		this.auth.login(user).subscribe(
+		this.lSub = this.auth.login(user).subscribe(
 			() => {
 				this.form.reset();
-				this.router.navigate(["/admin", "dashboard"]);
+				this.router.navigate(['/admin', 'dashboard']);
 				this.submitted = false;
 			},
 			() => {

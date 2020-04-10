@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import { Post } from 'src/app/shared/interfaces';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PostsService } from '../../shared/posts.service';
@@ -10,8 +11,9 @@ import { PostsService } from '../../shared/posts.service';
 	templateUrl: './create-page.component.html',
 	styleUrls: ['./create-page.component.scss'],
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent implements OnInit, OnDestroy {
 	form: FormGroup;
+	cSub: Subscription;
 
 	constructor(private postsService: PostsService) {}
 
@@ -21,6 +23,10 @@ export class CreatePageComponent implements OnInit {
 			text: new FormControl(null, Validators.required),
 			author: new FormControl(null, Validators.required),
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.cSub.unsubscribe();
 	}
 
 	submit() {
@@ -35,7 +41,7 @@ export class CreatePageComponent implements OnInit {
 			date: new Date(),
 		};
 
-		this.postsService.create(post).subscribe(() => {
+		this.cSub = this.postsService.create(post).subscribe(() => {
 			this.form.reset();
 		});
 	}
