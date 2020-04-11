@@ -4,7 +4,9 @@ import enLocale from '@angular/common/locales/en';
 import ruLocale from '@angular/common/locales/ru';
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -24,7 +26,7 @@ const INTERSEPTOR_PROVIDER: Provider = {
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, HomePageComponent, PostPageComponent, PostComponent],
-	imports: [BrowserModule, AppRoutingModule, SharedModule],
+	imports: [BrowserModule, AppRoutingModule, SharedModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
 	providers: [INTERSEPTOR_PROVIDER],
 	bootstrap: [AppComponent],
 })
