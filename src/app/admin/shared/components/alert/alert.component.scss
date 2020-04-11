@@ -4,3 +4,13 @@
 	right: 40px;
 	max-width: 200px;
 }
+
+.alert-warning {
+	background: var(--warning-color);
+	color: #000;
+}
+
+.alert-danger {
+	background: var(--danger-color);
+	color: #fff;
+}

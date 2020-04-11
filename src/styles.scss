@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
-@import "quill/dist/quill.core";
-@import "quill/dist/quill.snow";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import 'quill/dist/quill.core';
+@import 'quill/dist/quill.snow';
 
 :root {
 	--primary-color: #dc3545;
@@ -8,6 +8,7 @@
 	--light-color: #f4f4f4;
 	--danger-color: #dc3545;
 	--success-color: #28a745;
+	--warning-color: yellow;
 }
 
 * {
@@ -17,7 +18,7 @@
 }
 
 body {
-	font-family: "Roboto", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 1rem;
 	line-height: 1.6;
 	background-color: #fff;
@@ -228,10 +229,10 @@ img {
 	}
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
 select,
 textarea {
 	display: block;
@@ -241,7 +242,7 @@ textarea {
 	border: 1px solid #ccc;
 }
 
-input[type="submit"],
+input[type='submit'],
 button {
 	font: inherit;
 }

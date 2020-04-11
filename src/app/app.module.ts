@@ -1,4 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import enLocale from '@angular/common/locales/en';
+import ruLocale from '@angular/common/locales/ru';
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,6 +13,8 @@ import { AuthInterceptor } from './shared/auth.interseptor';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { SharedModule } from './shared/shared.module';
+
+registerLocaleData(enLocale, 'en');
 
 const INTERSEPTOR_PROVIDER: Provider = {
 	provide: HTTP_INTERCEPTORS,

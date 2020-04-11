@@ -37,7 +37,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 	remove(id: string) {
 		this.dSub = this.postsService.remove(id).subscribe(() => {
 			this.posts = this.posts.filter((post) => post.id !== id);
-			this.alertService.danger('The post was removed');
+			this.alertService.warning('The post was removed');
 		});
 	}
 }
