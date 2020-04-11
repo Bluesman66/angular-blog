@@ -9,7 +9,9 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
+import { AlertComponent } from './shared/components/alert/alert.component';
 import { SearchPipe } from './shared/search.pipe';
+import { AlertService } from './shared/services/alert.service';
 import { AuthGuard } from './shared/services/auth.guard';
 
 @NgModule({
@@ -20,6 +22,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 		CreatePageComponent,
 		EditPageComponent,
 		SearchPipe,
+		AlertComponent,
 	],
 	imports: [
 		CommonModule,
@@ -41,6 +44,6 @@ import { AuthGuard } from './shared/services/auth.guard';
 		]),
 	],
 	exports: [RouterModule],
-	providers: [AuthGuard],
+	providers: [AuthGuard, AlertService],
 })
 export class AdminModule {}
