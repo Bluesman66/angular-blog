@@ -1,45 +1,22 @@
-<div class="post">
-	<div class="header">
-		<h1>Posts Title</h1>
+<div *ngIf="post$ | async as post; else loading">
+	<div class="post">
+		<div class="header">
+			<h1>{{ post.title }}</h1>
 
-		<button routerLink="/" class="btn btn-link">Main Page</button>
-	</div>
+			<button routerLink="/" class="btn btn-link">Main Page</button>
+		</div>
 
-	<div class="info">
-		<strong>Author</strong>
-		<small>04/05/2020</small>
-	</div>
+		<div class="info">
+			<strong>{{ post.author }}</strong>
+			<small>{{ post.date | date: 'medium':null:'en' }}</small>
+		</div>
 
-	<div>
-		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, libero repudiandae! Quisquam, vitae aperiam
-			eius in voluptatem nihil unde reiciendis excepturi voluptas expedita quas sunt natus at? Ad, hic quis! Lorem ipsum
-			dolor sit amet consectetur adipisicing elit. Enim cumque est harum amet alias quibusdam excepturi sequi. Aut
-			molestiae velit exercitationem quos, at inventore a, veritatis illum sed, cumque voluptatibus? Lorem ipsum dolor
-			sit amet, consectetur adipisicing elit. Unde quas facere totam nam, atque velit minima, ipsam suscipit quis
-			deserunt magni assumenda? Distinctio vero, ea iste praesentium sint atque odio. Lorem ipsum dolor sit amet
-			consectetur adipisicing elit. Quibusdam repudiandae magni ducimus eligendi doloremque excepturi explicabo totam
-			maiores obcaecati, provident debitis voluptatem suscipit, expedita quaerat molestiae culpa sed tenetur mollitia.
-		</p>
-		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, libero repudiandae! Quisquam, vitae aperiam
-			eius in voluptatem nihil unde reiciendis excepturi voluptas expedita quas sunt natus at? Ad, hic quis! Lorem ipsum
-			dolor sit amet consectetur adipisicing elit. Enim cumque est harum amet alias quibusdam excepturi sequi. Aut
-			molestiae velit exercitationem quos, at inventore a, veritatis illum sed, cumque voluptatibus? Lorem ipsum dolor
-			sit amet, consectetur adipisicing elit. Unde quas facere totam nam, atque velit minima, ipsam suscipit quis
-			deserunt magni assumenda? Distinctio vero, ea iste praesentium sint atque odio. Lorem ipsum dolor sit amet
-			consectetur adipisicing elit. Quibusdam repudiandae magni ducimus eligendi doloremque excepturi explicabo totam
-			maiores obcaecati, provident debitis voluptatem suscipit, expedita quaerat molestiae culpa sed tenetur mollitia.
-		</p>
-		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, libero repudiandae! Quisquam, vitae aperiam
-			eius in voluptatem nihil unde reiciendis excepturi voluptas expedita quas sunt natus at? Ad, hic quis! Lorem ipsum
-			dolor sit amet consectetur adipisicing elit. Enim cumque est harum amet alias quibusdam excepturi sequi. Aut
-			molestiae velit exercitationem quos, at inventore a, veritatis illum sed, cumque voluptatibus? Lorem ipsum dolor
-			sit amet, consectetur adipisicing elit. Unde quas facere totam nam, atque velit minima, ipsam suscipit quis
-			deserunt magni assumenda? Distinctio vero, ea iste praesentium sint atque odio. Lorem ipsum dolor sit amet
-			consectetur adipisicing elit. Quibusdam repudiandae magni ducimus eligendi doloremque excepturi explicabo totam
-			maiores obcaecati, provident debitis voluptatem suscipit, expedita quaerat molestiae culpa sed tenetur mollitia.
-		</p>
+		<div>
+			<quill-view-html [content]="post.text"></quill-view-html>
+		</div>
 	</div>
 </div>
+
+<ng-template #loading>
+	<p class="text-center">Loading...</p>
+</ng-template>
